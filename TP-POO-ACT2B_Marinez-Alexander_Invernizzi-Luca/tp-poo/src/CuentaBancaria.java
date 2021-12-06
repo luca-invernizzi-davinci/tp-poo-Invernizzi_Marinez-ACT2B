@@ -23,32 +23,35 @@ public class CuentaBancaria {
     }
 
     //Metodos
-    public void depositar(double cantidad) {
+    private void depositar(double cantidad) {
         if (cantidad > 0) {
             saldo = saldo + cantidad;
             ultimoMovimiento=cantidad;
         }
     }
 
-    public void retirar(double cantidad) {
+    private void retirar(double cantidad) {
         if (cantidad > 0) {
-            saldo = saldo - cantidad;
+            cantidad= Double.parseDouble("-" + cantidad);
+            saldo = saldo + cantidad;
             ultimoMovimiento=cantidad;
         }
         if (saldo < cantidad){
-            System.out.println("Sos pobre, no tenes plata \n");
+            System.out.println("No tenes plata \n");
         }
     }
 
-    public void consultarUltimoMovimiento() {
+    public void consultarUltimoMovimiento(double ultimoMovimiento) {
         if (ultimoMovimiento > 0){
             System.out.println("Cantidad depositada: " + ultimoMovimiento + "\n");
         } else if (ultimoMovimiento < 0) {
             System.out.println("Cantidad retirada: " + ultimoMovimiento + "\n");
-        } else if (ultimoMovimiento == 0) {
+        } else if (ultimoMovimiento == 0 ) {
             System.out.println("No se han realizado transacciones \n");
         }
     }
+
+
 
     public void mostrarMenu (){
         System.out.println("Bienvenido " + nombreCliente);
@@ -82,7 +85,7 @@ public class CuentaBancaria {
                 mostrarMenu();
                 break;
             case "D":
-                consultarUltimoMovimiento();
+                consultarUltimoMovimiento(ultimoMovimiento);
                 mostrarMenu();
                 break;
             case "E":
@@ -93,4 +96,6 @@ public class CuentaBancaria {
                 mostrarMenu();
         }
     }
+
+
 }
